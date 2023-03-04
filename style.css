@@ -1,0 +1,223 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  .container {
+    z-index: 1;
+    perspective:10000px; 
+  }
+.container .book {
+    position: relative;  
+    display: block;
+    width: 54.042vw;
+    height: 66.32vh; 
+    margin: 5% auto;
+    border-radius: 2px 4px 4px 2px;
+    font-family: acumin-pro, sans-serif;
+    font-weight: 400;
+    color: #cf0000;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform .5s;
+    -moz-transition: -moz-transform .5s;
+    transition: transform .5s;
+    transform: translateX(-25%);
+  }
+  .container .book:hover{
+    -webkit-transform: rotate3d(0,1,0,35deg);
+    -moz-transform: rotate3d(0,1,0,35deg);
+    transform: rotate3d(0,5,1,45deg);
+  }
+  .container .book.slide-book{
+    transform: none;
+  }
+  .container .book > div, 
+  .container .front .pages #cover {
+    display: block;
+    position: absolute;  
+  }
+  .container .front {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    -moz-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+    -webkit-transition: -webkit-transform .5s;
+    -moz-transition: -moz-transform .5s;
+    transition: transform .5s;
+    -webkit-transform: translate3d(0,0,20px);
+    -moz-transform: translate3d(0,0,20px);
+    transform: translate3d(0,0,20px);
+    z-index: 1000;
+  }
+  .container .front .pages #cover {
+    width: 50%;
+    height: 66.32vh;
+  }
+  #cover {
+    background: linear-gradient(45deg,  #DAD5DC 0%, #f2ebf4 100%);
+  }
+  .container .front .pages #cover {
+    border-radius: 0 3px 3px 0;
+    box-shadow: 
+      inset 4px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .container #cover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5%;
+    bottom: 0;
+    width: 4px;
+    background: rgba(0,0,0,0.1);
+    box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+  }
+.pages {
+   width: 54.042vw;
+   height: 66.32vh;
+   position: relative;
+   transform-style: preserve-3d;
+   backface-visibility: hidden; 
+   border-radius: 4px;
+ }
+  .page {
+    width: 26.042vw;
+    height: 66.32vw;
+    background-color: #111111;
+    float: left;
+    margin-bottom: 0.5em;
+    background: left top no-repeat;
+    background-size: cover;
+  }
+  .front .page{
+    float: none;
+    clear: none;
+    padding: 25px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 66.32vh;
+    transform-origin: 0 0;
+    transition: transform 1.4s;
+    backface-visibility: hidden;/* To hide the front content of page on back side because the which comes after that will have lesser z-index so it will not overlap on previous page  */
+    transform-style: preserve-3d;
+    background-color: #f0f0f0;
+  }
+  .page:nth-child(even) {
+    clear: both;
+  }
+  .front .page:nth-child(even) {
+    pointer-events: none;
+    transform: rotateY(180deg);
+    transform-origin: 100% 0;
+    left: 0px; 
+    border-radius: 4px 0 0 4px;
+    border-color: black;
+    background-image: linear-gradient(to left, rgba(0,0,0,.18) 0%, rgba(0,0,0,0) 10%);
+  }
+  .front .page:nth-child(even):before {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .page:nth-child(odd){
+    background-position: right top;
+  }
+  .front .page:nth-child(odd) {
+    pointer-events: all;
+    transform: rotateY(0deg);
+    right: 1px;
+    border-radius: 0 4px 4px 0;
+    background-image: linear-gradient(to right, rgba(0,0,0,.18) 0%, rgba(0,0,0,0) 10%);
+  }
+  .front .page:nth-child(odd):hover {
+    transform: rotateY(-15deg);
+  }
+  .front .page:nth-child(odd):hover:before {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .front .page:nth-child(odd):before {
+    background: rgba(0, 0, 0, 0);
+  }
+  .front .page.grabbing {
+    transition: none;
+  }
+  .front .page.flipped:nth-child(odd) {
+    pointer-events: none;
+    transform: rotateY(-180deg);
+  }
+  .front .page.flipped:nth-child(odd):before {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .front .page.flipped:nth-child(even) {
+    pointer-events: all;
+    transform: rotateY(0deg);
+  }
+  .front .page.flipped:nth-child(even):hover {
+    transform: rotateY(15deg);
+  }
+  .front .page.flipped:nth-child(even):hover:before {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .front .page.flipped:nth-child(even):before {
+    background: rgba(0, 0, 0, 0);
+  }
+  * :before,
+  *:after {
+  box-sizing: border-box;
+  }
+  .container .front .pages #back-cover {
+    display: block;
+    position: absolute; 
+  }
+  .container .front .pages #back-cover {
+    width: 50%;
+    height: 66.32vh;
+  }
+  #back-cover {
+    background: linear-gradient(45deg,  #DAD5DC 0%, #f2ebf4 100%);
+  }
+  .container .front .pages #back-cover {
+    border-radius: 0 3px 3px 0;
+    box-shadow: 
+      inset 4px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .container #back-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left:95%;
+    bottom: 0;
+    width: 4px;
+    background: rgba(0,0,0,0.1);
+    box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+  }
+  .container .left-side{
+    width: 40px;
+    left: 26.042vw;
+    height: 66.32vh;
+    background-color: rgba(232,229,234);
+    -webkit-transform: rotate3d(0,1,0,-90deg);
+    -moz-transform: rotate3d(0,1,0,-90deg);
+    transform: rotate3d(0,1,0,-90deg);
+  }
+  .left-side h1 {
+    width: 26.042vw;
+    height: 40px;
+    color: #2b2b2b;
+    font-size: 25px;
+    line-height: 40px;
+    padding-right: 10px;
+    text-align: right;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    transform-origin: 0 0;
+    transform: rotate(90deg) translateY(-40px);  
+  }
+  .left-side h1 span{
+    padding-right: 20px;
+    transform: rotateY(90deg);
+    font-family: acumin-pro, sans-serif;
+  } 
